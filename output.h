@@ -8,7 +8,7 @@ namespace Tmpl8 {
 	class Output
     {
     public:
-        color Trace(Ray& r, Sphere& s);
+        color Trace(Ray& r, std::vector<Sphere*> s);
 
         void write_color(Surface* screen, color pixel_color, int posX, int posY);
 

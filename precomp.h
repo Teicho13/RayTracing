@@ -19,8 +19,11 @@
 #include <cstdio>
 #include <cassert>
 #include <cstring>
+#include <vector>
+
 
 #include "template.h"
 #include "surface.h"
+
 
 

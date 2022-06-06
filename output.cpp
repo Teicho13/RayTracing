@@ -1,7 +1,6 @@
 #include "precomp.h"
 #include "output.h"
 
-
 #include "PointLight.h"
 #include "Ray.h"
 #include "Sphere.h"
@@ -13,23 +12,25 @@ namespace Tmpl8
     //Lights
     PointLight pl1 = PointLight(vec3(2, 2, 1));
 
-    color Output::Trace(Ray& r, Sphere& s)
+    color Output::Trace(Ray& r, std::vector<Sphere*> s)
     {
-        if(s.IntersectRay(r))
-        {
-            vec3 HitPoint = r.Origin + r.Direction * r.t;
-            vec3 Dir = (pl1.Origin - HitPoint);
-            float DirL = Dir.length();
-            Ray shadowRay = Ray(HitPoint, Dir,DirL);
+	    for (unsigned int i = 0; i < s.size(); ++i)
+	    {
+		    if(s[i]->IntersectRay(r))
+		    {
+                vec3 HitPoint = r.Origin + r.Direction * r.t;
+                vec3 Dir = (pl1.Origin - HitPoint);
+                float DirL = Dir.length();
+                Ray shadowRay = Ray(HitPoint, Dir, DirL);
 
-            if(s.IntersectRay(shadowRay))
-            {
-                return color(0, 0, 0);
-            }
+                if (s[i]->IntersectRay(shadowRay))
+                {
+                    return color(0, 0, 0);
+                }
 
-            
-            return s.colr;
-        }
+                return s[i]->colr;
+		    }
+	    }
         return color(255, 255, 255);
     }
 
