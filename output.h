@@ -14,5 +14,6 @@ namespace Tmpl8 {
 
         //Current Color
         color CurColor;
+        color BackgroundCol;
     };
 }

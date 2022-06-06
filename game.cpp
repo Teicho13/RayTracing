@@ -16,7 +16,7 @@ namespace Tmpl8
 
 	//Sphere Obj
 	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.0f,color(30,144,255));
-	Sphere* sph2 = new Sphere(vec3(-1, 0, 5), 1.0f,color(140,255,10));
+	Sphere* sph2 = new Sphere(vec3(-1, 2, 5), 1.0f,color(140,255,10));
 
 	//Object list
 	std::vector<Sphere*> spheres;
@@ -24,6 +24,7 @@ namespace Tmpl8
 	void Game::Init()
 	{
 		out.CurColor = color(255, 0, 0);
+		out.BackgroundCol = color(255, 255, 255);
 		spheres.push_back(sph1);
 		spheres.push_back(sph2);
 	}

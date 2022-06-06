@@ -10,28 +10,38 @@ namespace Tmpl8
 {
 
     //Lights
-    PointLight pl1 = PointLight(vec3(2, 2, 1));
+    PointLight pl1 = PointLight(vec3(2, -2, 1));
 
     color Output::Trace(Ray& r, std::vector<Sphere*> s)
     {
 	    for (unsigned int i = 0; i < s.size(); ++i)
 	    {
-		    if(s[i]->IntersectRay(r))
-		    {
+            if (s[i]->IntersectRay(r))
+            {
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 Dir = (pl1.Origin - HitPoint);
-                float DirL = Dir.length();
-                Ray shadowRay = Ray(HitPoint, Dir, DirL);
+                vec3 normal = (HitPoint - s[i]->Origin).normalized();
 
+                vec3 Dir = (pl1.Origin - HitPoint);
+                Dir.normalize();
+                bool occluded = false;
+                float length = Dir.length();
+                Ray shadowRay = Ray(HitPoint, Dir, length);
                 if (s[i]->IntersectRay(shadowRay))
-                {
+                 {
+                    occluded = true;
                     return color(0, 0, 0);
                 }
+                if(occluded != true){}
+                float d = dot(normal, Dir);
+                if (d < 0.0f)
+                {
+                    d = 0.0f;
+                }
 
-                return s[i]->colr;
-		    }
+                return s[i]->colr * d;
+            }
 	    }
-        return color(255, 255, 255);
+        return BackgroundCol;
     }
 
 	void Output::write_color(Surface* screen, color pixel_color, int posX, int posY)
