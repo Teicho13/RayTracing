@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="surface.cpp">
+      <Filter>template code</Filter>
+    </ClCompile>
+    <ClCompile Include="template.cpp">
+      <Filter>template code</Filter>
+    </ClCompile>
+    <ClCompile Include="precomp.cpp">
+      <Filter>template code</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="output.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Rays</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="surface.h">
+      <Filter>template code</Filter>
+    </ClInclude>
+    <ClInclude Include="template.h">
+      <Filter>template code</Filter>
+    </ClInclude>
+    <ClInclude Include="precomp.h">
+      <Filter>template code</Filter>
+    </ClInclude>
+    <ClInclude Include="output.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Rays</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="template code">
+      <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{7ced4eb0-e7fa-4cc1-bf03-e80dfe3cdf57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rays">
+      <UniqueIdentifier>{9acc3c6f-2353-4b83-9eba-3658bf4fd95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{eece8edf-6abe-4a5d-b309-cd4a4ef8fb07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{6b951ec4-5a6d-4494-9ed2-0ef3a0b23690}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="_readme.txt">
+      <Filter>template code</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
