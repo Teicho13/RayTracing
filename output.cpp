@@ -19,7 +19,21 @@ namespace Tmpl8
             if (s[i]->IntersectRay(r))
             {
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 normal = (HitPoint - s[i]->Origin).normalized();
+                vec3 N = s[i]->getNormal(HitPoint);
+
+                if(s[i]->isMirror)
+                {
+                    vec3 ReflectDir = r.Direction - 2 * (r.Direction * N) * N;
+                    vec3 reflectOr = HitPoint + ReflectDir * epsilon;
+
+                    Ray reflectRay(reflectOr, ReflectDir,INFINITY);
+                    color clr = s[i]->colr * 0.2;
+                    return clr + Trace(reflectRay,s) * 0.8;
+                }else
+                {
+	                
+                }
+
 
                 /*vec3 Dir = (pl1.Origin - HitPoint);
                 Dir.normalize();

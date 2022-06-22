@@ -3,11 +3,12 @@
 #include "Ray.h"
 namespace Tmpl8
 {
-	Sphere::Sphere(vec3 o, float r, color c)
+	Sphere::Sphere(vec3 o, float r, color c, bool mir)
 	{
 		Origin = o;
 		radius = r;
 		colr = c;
+		isMirror = mir;
 	}
 
 	bool Sphere::IntersectRay(Ray& r)
@@ -26,5 +27,10 @@ namespace Tmpl8
 			return true;
 		}
 		return false;
+	}
+
+	vec3 Sphere::getNormal(vec3 point)
+	{
+		return normalize(point - Origin);
 	}
 }
