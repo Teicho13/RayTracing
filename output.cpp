@@ -21,24 +21,18 @@ namespace Tmpl8
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
                 vec3 normal = (HitPoint - s[i]->Origin).normalized();
 
-                vec3 Dir = (pl1.Origin - HitPoint);
+                /*vec3 Dir = (pl1.Origin - HitPoint);
                 Dir.normalize();
-                bool occluded = false;
                 float length = Dir.length();
-                Ray shadowRay = Ray(HitPoint, Dir, length);
-                if (s[i]->IntersectRay(shadowRay))
-                 {
-                    occluded = true;
-                    return color(0, 0, 0);
-                }
-                if(occluded != true){}
-                float d = dot(normal, Dir);
-                if (d < 0.0f)
-                {
-                    d = 0.0f;
-                }
 
-                return s[i]->colr * d;
+                Ray sr(HitPoint, Dir, length);*/
+
+                /*if(pl1.intersect(sr))
+                {
+                    return color(0, 0, 0);
+                }*/
+
+                return s[i]->colr ;
             }
 	    }
         return BackgroundCol;

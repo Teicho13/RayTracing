@@ -21,7 +21,7 @@ namespace Tmpl8
 		if(q2 > r2) return false;
 
 		float rayT = t - sqrtf(r2 - q2);
-		if (rayT < r.t && rayT > 0.0f) {
+		if (rayT < r.t && rayT >= epsilon) {
 			r.t = rayT;
 			return true;
 		}

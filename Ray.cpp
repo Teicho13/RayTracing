@@ -7,7 +7,7 @@ namespace Tmpl8
 	{
 		Origin = vec3(0,0,0);
 		Direction = vec3(0,0,0);
-		t = 0;
+		t = INFINITY;
 	}
 
 	Ray::Ray(vec3 orig, vec3 dir, float length)

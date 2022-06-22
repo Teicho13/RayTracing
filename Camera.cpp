@@ -19,7 +19,7 @@ namespace Tmpl8
 	{
 		vec3 Point = p0 + (p1 - p0) * u + (p2 - p0) * v;
 		vec3 RayDir = Point - Origin;
-		return Ray(Origin, RayDir.normalized(), 100);
+		return Ray(Origin, RayDir.normalized(), INFINITY);
 	}
 }
 
