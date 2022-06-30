@@ -10,43 +10,47 @@ namespace Tmpl8
 {
 
     //Lights
-    PointLight pl1 = PointLight(vec3(2, -2, 1));
+    PointLight pl1 = PointLight(vec3(1, -10, 3),color(255,255,255),0.2f);
 
     color Output::Trace(Ray& r, std::vector<Sphere*> s)
     {
+        vec3 LightEnergy(0);
 	    for (unsigned int i = 0; i < s.size(); ++i)
 	    {
-            if (s[i]->IntersectRay(r))
+            if (s[i]->IntersectRay(r,0,INFINITY))
             {
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 N = s[i]->getNormal(HitPoint);
 
-                if(s[i]->isMirror)
-                {
-                    vec3 ReflectDir = r.Direction - 2 * (r.Direction * N) * N;
-                    vec3 reflectOr = HitPoint + ReflectDir * epsilon;
-
-                    Ray reflectRay(reflectOr, ReflectDir,INFINITY);
-                    color clr = s[i]->colr * 0.2;
-                    return clr + Trace(reflectRay,s) * 0.8;
-                }else
-                {
-	                
-                }
-
-
-                /*vec3 Dir = (pl1.Origin - HitPoint);
+                vec3 Dir = (pl1.Origin - HitPoint);
                 Dir.normalize();
+
                 float length = Dir.length();
 
-                Ray sr(HitPoint, Dir, length);*/
+                float LNormal = 1 / length;
 
-                /*if(pl1.intersect(sr))
+                float NdotL = Max(0.0f, dot(HitPoint, Dir * LNormal));
+
+
+                Ray Shadowray(HitPoint, Dir, INFINITY);
+
+                if(NdotL > 0)
                 {
-                    return color(0, 0, 0);
-                }*/
+                    if (!s[i]->IntersectRay(Shadowray, 0.01f, length - 2 * 0.01f))
+                    {
+                        vec3 hitP = Shadowray.Origin + Shadowray.Direction * Shadowray.t;
+                        vec3 outward_normal = (hitP - s[i]->Origin) / s[i]->radius;
+                        bool frontface = dot(Shadowray.Direction, outward_normal) < 0;
+                        vec3 normal = frontface ? outward_normal : -outward_normal;
+                        color col = s[i]->colr;
+                        //rec.mat = m_Mat;
+                        LightEnergy += (1 / LNormal * NdotL) * pl1.col * pl1.intensity;
+                        //return color(0, 0, 0);
+                    }
+                }
 
-                return s[i]->colr ;
+                
+
+                return LightEnergy * s[i]->colr;
             }
 	    }
         return BackgroundCol;

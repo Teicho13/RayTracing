@@ -15,9 +15,10 @@ namespace Tmpl8
 	Camera cam;
 
 	//Sphere Obj
+	//Background
 	Sphere* sph0 = new Sphere(vec3(0, 4, 3), 2.5f, color(90, 252, 89), false);
 	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.0f,color(30,144,255),false);
-	Sphere* sph2 = new Sphere(vec3(-1, 2, 5), 1.0f,color(140,255,10),true);
+	//Sphere* sph2 = new Sphere(vec3(-1, 2, 5), 1.0f,color(153,0,153),true);
 
 	//Object list
 	std::vector<Sphere*> spheres;
@@ -27,7 +28,7 @@ namespace Tmpl8
 		out.CurColor = color(255, 0, 0);
 		out.BackgroundCol = color(53, 81, 92);
 		spheres.push_back(sph1);
-		spheres.push_back(sph2);
+		//spheres.push_back(sph2);
 		spheres.push_back(sph0);
 	}
 

@@ -7,11 +7,11 @@ namespace Tmpl8
 	{
 	public:
 
-		PointLight(vec3 o);
-
-		bool intersect(Ray& r);
+		PointLight(vec3 o, color c, float i);
 
 		vec3 Origin;
+		color col;
+		float intensity;
 	};
 }
 
