@@ -13,20 +13,41 @@ namespace Tmpl8
 
 	bool Sphere::IntersectRay(Ray& r)
 	{
-		vec3 c = Origin - r.Origin;
-		float t = dot(c, r.Direction);
-		vec3 q = c - (t * r.Direction);
-		float q2 = dot(q, q);
-		float r2 = dot(radius, radius);
+		vec3 oc = r.Origin - Origin;
+		float a = dot(r.Direction, r.Direction);
+		float b = 2 * dot(r.Direction, oc);
+		float r2 = radius * radius;
+		float c = dot(oc, oc) - r2;
 
-		if(q2 > r2) return false;
-
-		float rayT = t - sqrtf(r2 - q2);
-		if (rayT < r.t && rayT >= epsilon) {
-			r.t = rayT;
+		float t0, t1 = 0;
+		//Checking if we hit the sphere
+		if(solveDisc(a, b, c,t0,t1))
+		{
 			return true;
 		}
 		return false;
+	}
+
+	bool Sphere::solveDisc(float a, float b, float c, float& t0, float& t1)
+	{
+		float discriminant = b * b - 4 * a * c;
+
+		if(discriminant < 0)
+		{
+			//No solutions
+			return false;
+		}
+
+		if(discriminant == 0)
+		{
+			//1 solution
+			t0 = t1 = -b / (2 * a);
+			return true;
+		}
+
+		t0 = (-b + sqrtf(discriminant)) / (2 * a);
+		t1 = (-b - sqrtf(discriminant)) / (2 * a);
+		return true;
 	}
 
 	vec3 Sphere::getNormal(vec3 point)
