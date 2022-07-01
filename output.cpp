@@ -67,14 +67,12 @@ namespace Tmpl8
         }
 
         //make RGB values from vector
-        //and Clamp them to 255
-
-        int r = static_cast<int>(Clamp(r1, 0.0f, 255.0f));
-        int g = static_cast<int>(Clamp(g1, 0.0f, 255.0f));
-        int b = static_cast<int>(Clamp(b1, 0.0f, 255.0f));
+        int r = static_cast<int>(256 * Clamp(r1, 0.0f, 0.999f));
+        int g = static_cast<int>(256 * Clamp(g1, 0.0f, 0.999f));
+        int b = static_cast<int>(256 * Clamp(b1, 0.0f, 0.999f));
 
         //add RGB values together to create a Hexvalue
-        const int hexVal = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+        int hexVal = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 
         //print on screen and invert image vertically
         screen->Plot(posX, (ScreenHeight - posY) - 1, hexVal);

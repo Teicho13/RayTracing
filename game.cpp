@@ -15,17 +15,17 @@ namespace Tmpl8
 	Camera cam;
 
 	//Sphere Obj
-	Sphere* sph0 = new Sphere(vec3(0, 4, 3), 2.5f, color(90, 252, 89), false);
-	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.0f,color(30,144,255),false);
-	Sphere* sph2 = new Sphere(vec3(-1, 2, 5), 1.0f,color(140,255,10),true);
+	Sphere* sph0 = new Sphere(vec3(0, 4, 3), 2.5f, color(0.35f, 0.98f, 0.34f), false);
+	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.0f,color(0.11f,0.56f,1),false);
+	Sphere* sph2 = new Sphere(vec3(-1, 2, 5), 1.0f,color(0.54f,1,0.03f),true);
 
 	//Object list
 	std::vector<Sphere*> spheres;
 
 	void Game::Init()
 	{
-		out.CurColor = color(255, 0, 0);
-		out.BackgroundCol = color(53, 81, 92);
+		out.CurColor = color(1, 0, 0);
+		out.BackgroundCol = color(0.20f, 0.31f, 0.36f);
 		spheres.push_back(sph1);
 		spheres.push_back(sph2);
 		spheres.push_back(sph0);
