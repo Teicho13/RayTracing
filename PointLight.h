@@ -9,8 +9,6 @@ namespace Tmpl8
 
 		PointLight(vec3 o, color c, float i);
 
-		bool intersect(Ray& r);
-
 		vec3 Origin;
 		color col;
 		float intensity;

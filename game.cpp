@@ -8,6 +8,8 @@
 
 #include "Material.h"
 
+#include "Objects.h"
+
 namespace Tmpl8
 {
 	//Main Trace function / screen output
@@ -16,10 +18,8 @@ namespace Tmpl8
 	//Main Camera
 	Camera cam;
 
-	//Sphere Obj
-	//Ground
-	Sphere* sph0 = new Sphere(vec3(0, 30.f, 1), 30.f, new Material(color(0.35f, 0.98f, 0.34f),diffuse));
-	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.5f, new Material(color(0.11f, 0.56f, 1),diffuse));
+	//Create Objects for the scene
+	Objects obj;
 
 	//Object list
 	std::vector<Sphere*> spheres;
@@ -28,8 +28,6 @@ namespace Tmpl8
 	{
 		out.CurColor = color(1, 0, 0);
 		out.BackgroundCol = color(0.20f, 0.31f, 0.36f);
-		spheres.push_back(sph1);
-		spheres.push_back(sph0);
 	}
 
 	void Game::Tick(float deltaTime)
@@ -44,7 +42,7 @@ namespace Tmpl8
 
 				Ray r = cam.GenerateRay(u, v);
 
-				out.CurColor = out.Trace(r,spheres);
+				out.CurColor = out.Trace(r,obj);
 
 				out.write_color(screen, out.CurColor, i, j);
 			}

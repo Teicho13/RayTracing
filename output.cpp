@@ -6,45 +6,53 @@
 #include "Ray.h"
 #include "Sphere.h"
 
+#include "Objects.h"
+
 
 namespace Tmpl8
 {
 
-    //Lights
-    PointLight pl1 = PointLight(vec3(-1, -3.5, 3.5), color(1, 1, 1), 3.3f);
-
-    color Output::Trace(Ray& r, std::vector<Sphere*> s)
+    color Output::Trace(Ray& r, Objects& obj)
     {
         vec3 LightEnergy(0);
 
-        for (unsigned int i = 0; i < s.size(); ++i)
+        for (unsigned int i = 0; i < obj.spheres.size(); ++i)
         {
-            if (s[i]->IntersectRay(r))
+            if (obj.spheres[i]->IntersectRay(r))
             {
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 N = s[i]->getNormal(HitPoint,r.Direction);
+                vec3 N = obj.spheres[i]->getNormal(HitPoint,r.Direction);
 
-                vec3 L = pl1.Origin - HitPoint;
-                vec3 Dir = normalize(L);
-                Ray shadowRay(HitPoint, Dir, INFINITY);
-
-                float lNormal = 1 / L.length();
-                float NdotL = Max(0.0f, dot(N, L * lNormal));
-
-
-                float l = L.length();
-
-                if (NdotL > 0)
-                {
-                    if (!s[i]->IntersectRay(shadowRay, epsilon, l - 2 * epsilon))
-                    {
-                        LightEnergy += (lNormal * NdotL) * pl1.col * pl1.intensity;
-                    }
-                }
-                return LightEnergy * s[i]->material->col;
+                return Illumination(HitPoint, N, obj) * obj.spheres[i]->material->col;
             }
         }
         return BackgroundCol;
+    }
+
+    color Output::Illumination(vec3 hitP, vec3 N, Objects& obj)
+    {
+        vec3 LightEnergy(0);
+
+        for (int i = 0; i < obj.lights.size(); ++i)
+        {
+            vec3 L = obj.lights[i]->Origin - hitP;
+            vec3 Dir = normalize(L);
+            Ray shadowRay(hitP, Dir, INFINITY);
+
+            float lNormal = 1 / L.length();
+            float NdotL = Max(0.0f, dot(N, L * lNormal));
+
+            float l = L.length();
+            if (NdotL > 0)
+            {
+                if(obj.hit(shadowRay, epsilon, l - 2 * epsilon))
+                {
+                    LightEnergy += (lNormal * NdotL) * obj.lights[i]->col * obj.lights[i]->intensity;
+                }
+            }
+        }
+
+        return LightEnergy;
     }
 
     void Output::write_color(Surface* screen, color pixel_color, int posX, int posY)

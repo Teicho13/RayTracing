@@ -2,13 +2,14 @@
 #include "precomp.h"
 
 namespace Tmpl8 {
-	class Sphere;
+	class Objects;
 	class Ray;
 
 	class Output
     {
     public:
-        color Trace(Ray& r, std::vector<Sphere*> s);
+        color Trace(Ray& r, Objects& obj);
+        color Illumination(vec3 hitP, vec3 N, Objects& obj);
 
         void write_color(Surface* screen, color pixel_color, int posX, int posY);
 
