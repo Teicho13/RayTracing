@@ -11,19 +11,40 @@
 
 namespace Tmpl8
 {
-
-    color Output::Trace(Ray& r, Objects& obj)
+    int depth = 5;
+    color Output::Trace(Ray& r, Objects& obj, int depth)
     {
-        vec3 LightEnergy(0);
-
+        depth -= 1;
+        if (depth == 0) return BackgroundCol;
         for (unsigned int i = 0; i < obj.spheres.size(); ++i)
         {
             if (obj.spheres[i]->IntersectRay(r))
             {
-                vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 N = obj.spheres[i]->getNormal(HitPoint,r.Direction);
+                color clr = obj.spheres[i]->material->col * 0.2;
 
-                return Illumination(HitPoint, N, obj) * obj.spheres[i]->material->col;
+                if(obj.spheres[i]->material->type == diffuse)
+                {
+                    vec3 HitPoint = r.Origin + r.Direction * r.t;
+                    vec3 N = obj.spheres[i]->getNormal(HitPoint, r.Direction);
+
+                    return Illumination(HitPoint, N, obj) * obj.spheres[i]->material->col;
+                }
+                if (obj.spheres[i]->material->type == mirror)
+                {
+                    vec3 HitPoint = r.Origin + r.Direction * r.t;
+                    vec3 N = obj.spheres[i]->getNormal(HitPoint);
+
+                    vec3 direction = r.Direction - 2 * (r.Direction * N) * N;
+                    vec3 origin = HitPoint + direction * epsilon;
+                    Ray reflectRay(origin, direction,INFINITY);
+                    color reflectionColor = Trace(reflectRay, obj, depth);
+
+                    return clr + reflectionColor * 0.8;
+                }
+                if (obj.spheres[i]->material->type == dielectric)
+                {
+
+                }
             }
         }
         return BackgroundCol;

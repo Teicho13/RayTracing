@@ -91,6 +91,11 @@ namespace Tmpl8
 		return true;
 	}
 
+	vec3 Sphere::getNormal(vec3 point)
+	{
+		return normalize(point - Origin);
+	}
+
 	vec3 Sphere::getNormal(vec3 point, vec3 direction)
 	{
 		vec3 outward_normal = (point - Origin) / radius;

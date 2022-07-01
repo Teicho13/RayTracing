@@ -16,7 +16,9 @@ namespace Tmpl8
 		bool IntersectRay(Ray& r, float t_min,float t_max);
 		bool solveDisc(float a, float b, float c, float& t0, float& t1);
 
+		vec3 getNormal(vec3 point);
 		vec3 getNormal(vec3 point, vec3 direction);
+		
 
 		vec3 Origin;
 		float radius;

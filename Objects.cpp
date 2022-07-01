@@ -35,7 +35,7 @@ namespace Tmpl8
 		Sphere* sph0 = new Sphere(vec3(0, 30.f, 1), 30.f, new Material(color(0.35f, 0.98f, 0.34f), diffuse));
 
 		//Midle blue sphere
-		Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.5f, new Material(color(0.11f, 0.56f, 1), diffuse));
+		Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.5f, new Material(color(0.11f, 0.56f, 1), mirror));
 
 		spheres.push_back(sph1);
 		spheres.push_back(sph0);
