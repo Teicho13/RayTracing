@@ -19,7 +19,7 @@ namespace Tmpl8
 	bool Objects::hit(Ray& r, float t_min, float t_max)
 	{
 		bool hit = false;
-		for (int i = 0; i < spheres.size(); ++i)
+		for (unsigned int i = 0; i < spheres.size(); ++i)
 		{
 			if (spheres[i]->IntersectRay(r, t_min, t_max))
 			{

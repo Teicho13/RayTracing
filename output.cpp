@@ -33,7 +33,7 @@ namespace Tmpl8
     {
         vec3 LightEnergy(0);
 
-        for (int i = 0; i < obj.lights.size(); ++i)
+        for (unsigned int i = 0; i < obj.lights.size(); ++i)
         {
             vec3 L = obj.lights[i]->Origin - hitP;
             vec3 Dir = normalize(L);
