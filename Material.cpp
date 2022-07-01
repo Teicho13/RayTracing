@@ -3,9 +3,15 @@
 
 namespace Tmpl8
 {
-	Material::Material(vec3 col, MaterialType matType)
+	Material::Material()
 	{
-		color = col;
+		col = color(0);
+		type = diffuse;
+	}
+
+	Material::Material(color c, MaterialType matType)
+	{
+		col = c;
 		type = matType;
 	}
 }

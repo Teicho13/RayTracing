@@ -3,13 +3,13 @@
 #include "Ray.h"
 namespace Tmpl8
 {
-	Sphere::Sphere(vec3 o, float r, color c, bool mir)
+	Sphere::Sphere(vec3 o, float r, Material* mat)
 	{
 		Origin = o;
 		radius = r;
-		colr = c;
-		isMirror = mir;
+		material = mat;
 	}
+
 
 	bool Sphere::IntersectRay(Ray& r)
 	{

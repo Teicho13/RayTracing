@@ -1,12 +1,15 @@
 #pragma once
+
+
 namespace Tmpl8
 {
+	class Material;
 	class Ray;
 
 	class Sphere
 	{
 	public:
-		Sphere(vec3 o, float r, color c , bool mir);
+		Sphere(vec3 o, float r, Material* mat);
 
 
 		bool IntersectRay(Ray& r);
@@ -17,8 +20,7 @@ namespace Tmpl8
 
 		vec3 Origin;
 		float radius;
-		color colr;
-		bool isMirror;
+		Material* material;
 	};
 }
 

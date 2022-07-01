@@ -1,6 +1,7 @@
 #include "precomp.h"
 #include "output.h"
 
+#include "Material.h"
 #include "PointLight.h"
 #include "Ray.h"
 #include "Sphere.h"
@@ -40,7 +41,7 @@ namespace Tmpl8
                         LightEnergy += (lNormal * NdotL) * pl1.col * pl1.intensity;
                     }
                 }
-                return LightEnergy * s[i]->colr ;
+                return LightEnergy * s[i]->material->col;
             }
         }
         return BackgroundCol;

@@ -4,9 +4,11 @@ namespace Tmpl8
 	class Material
 	{
 	public:
-		Material(vec3 col, MaterialType matType);
+		Material();
+		Material(vec3 c, MaterialType matType);
 
-		vec3 color;
+
+		color col;
 		float reflectionIndex;
 		float refractionIndex;
 		MaterialType type;
