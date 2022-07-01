@@ -25,7 +25,10 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -52,7 +55,10 @@
     <ClInclude Include="Sphere.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h" />
+    <ClInclude Include="PointLight.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
