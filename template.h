@@ -10,7 +10,7 @@
 
 constexpr int ScreenWidth = 512;
 constexpr int ScreenHeight = 512;
-constexpr float epsilon = 0.0001f;
+constexpr float epsilon = 0.01f;
 
 // #define FULLSCREEN
 // #define ADVANCEDGL	// faster if your system supports it. Switches SDL2's texture buffer out for OpenGL texture buffer with mappings to CPU Memory. 

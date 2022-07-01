@@ -15,8 +15,9 @@ namespace Tmpl8
 	Camera cam;
 
 	//Sphere Obj
-	Sphere* sph0 = new Sphere(vec3(0, 2.6, 1), 2.5f, color(0.35f, 0.98f, 0.34f), false);
-	Sphere* sph1 = new Sphere(vec3(0, 0, 3), 1.0f,color(0.11f,0.56f,1),false);
+	//Ground
+	Sphere* sph0 = new Sphere(vec3(0, 30.f, 1), 30.f, color(0.35f, 0.98f, 0.34f), false);
+	Sphere* sph1 = new Sphere(vec3(0, 0, 5), 1.5f,color(0.11f,0.56f,1),false);
 
 	//Object list
 	std::vector<Sphere*> spheres;

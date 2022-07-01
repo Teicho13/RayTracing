@@ -10,50 +10,44 @@ namespace Tmpl8
 {
 
     //Lights
-    PointLight pl1 = PointLight(vec3(2, -2, 1));
+    PointLight pl1 = PointLight(vec3(-1, -3.5, 3.5), color(1, 1, 1), 3.3f);
 
     color Output::Trace(Ray& r, std::vector<Sphere*> s)
     {
-	    for (unsigned int i = 0; i < s.size(); ++i)
-	    {
+        vec3 LightEnergy(0);
+
+        for (unsigned int i = 0; i < s.size(); ++i)
+        {
             if (s[i]->IntersectRay(r))
             {
                 vec3 HitPoint = r.Origin + r.Direction * r.t;
-                vec3 N = s[i]->getNormal(HitPoint);
+                vec3 N = s[i]->getNormal(HitPoint,r.Direction);
 
-                if(s[i]->isMirror)
-                {
-                    vec3 ReflectDir = r.Direction - 2 * (r.Direction * N) * N;
-                    vec3 reflectOr = HitPoint + ReflectDir * epsilon;
+                vec3 L = pl1.Origin - HitPoint;
+                vec3 Dir = normalize(L);
+                Ray shadowRay(HitPoint, Dir, INFINITY);
 
-                    Ray reflectRay(reflectOr, ReflectDir,INFINITY);
-                    color clr = s[i]->colr * 0.2;
-                    return clr + Trace(reflectRay,s) * 0.8;
-                }else
+                float lNormal = 1 / L.length();
+                float NdotL = Max(0.0f, dot(N, L * lNormal));
+
+
+                float l = L.length();
+
+                if (NdotL > 0)
                 {
-	                
+                    if (!s[i]->IntersectRay(shadowRay, epsilon, l - 2 * epsilon))
+                    {
+                        LightEnergy += (lNormal * NdotL) * pl1.col * pl1.intensity;
+                    }
                 }
-
-
-                /*vec3 Dir = (pl1.Origin - HitPoint);
-                Dir.normalize();
-                float length = Dir.length();
-
-                Ray sr(HitPoint, Dir, length);*/
-
-                /*if(pl1.intersect(sr))
-                {
-                    return color(0, 0, 0);
-                }*/
-
-                return s[i]->colr ;
+                return LightEnergy * s[i]->colr ;
             }
-	    }
+        }
         return BackgroundCol;
     }
 
-	void Output::write_color(Surface* screen, color pixel_color, int posX, int posY)
-	{
+    void Output::write_color(Surface* screen, color pixel_color, int posX, int posY)
+    {
         //Get vector values
         float r1 = pixel_color.x;
         float g1 = pixel_color.y;
