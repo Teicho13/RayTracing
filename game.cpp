@@ -42,7 +42,7 @@ namespace Tmpl8
 
 				Ray r = cam.GenerateRay(u, v);
 
-				out.CurColor = out.Trace(r,obj,5);
+				out.CurColor = out.Trace(r,obj,0);
 
 				out.write_color(screen, out.CurColor, i, j);
 			}

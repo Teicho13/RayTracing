@@ -11,11 +11,10 @@
 
 namespace Tmpl8
 {
-    int depth = 5;
+    int depth = 0;
     color Output::Trace(Ray& r, Objects& obj, int depth)
     {
-        depth -= 1;
-        if (depth == 0) return BackgroundCol;
+        if (depth >= 5) return BackgroundCol;
         for (unsigned int i = 0; i < obj.spheres.size(); ++i)
         {
             if (obj.spheres[i]->IntersectRay(r))
