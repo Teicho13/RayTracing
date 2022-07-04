@@ -15,6 +15,7 @@ namespace Tmpl8
     color Output::Trace(Ray& r, Objects& obj, int depth)
     {
         if (depth >= 5) return BackgroundCol;
+
         for (unsigned int i = 0; i < obj.spheres.size(); ++i)
         {
             if (obj.spheres[i]->IntersectRay(r))
@@ -30,21 +31,27 @@ namespace Tmpl8
                 }
                 if (obj.spheres[i]->material->type == mirror)
                 {
+
+
                     vec3 HitPoint = r.Origin + r.Direction * r.t;
                     vec3 N = obj.spheres[i]->getNormal(HitPoint);
 
-                    vec3 direction = r.Direction - 2 * (r.Direction * N) * N;
-                    vec3 origin = HitPoint + direction * epsilon;
-                    Ray reflectRay(origin, direction,INFINITY);
+                    vec3 reflectDir = reflect(r.Direction, N);
+
+                    vec3 origin = HitPoint  * epsilon;
+                    Ray reflectRay(origin, reflectDir,INFINITY);
                     color reflectionColor = Trace(reflectRay, obj, depth);
 
-                    return clr + reflectionColor * 0.8;
+                    return reflectionColor;
                 }
                 if (obj.spheres[i]->material->type == dielectric)
                 {
+ 
+
 
                 }
             }
+
         }
         return BackgroundCol;
     }
